@@ -80,7 +80,7 @@
 
     <script>
         async function fetchMessages() {
-            const response = await fetch('/api/comments');
+            const response = await fetch('https://ancient-coast-10467-29aec9277293.herokuapp.com/api/comments');  // 修改为 Heroku 的 URL
             const messages = await response.json();
             const messageList = document.getElementById("messageList");
 
@@ -99,7 +99,7 @@
                 return;
             }
 
-            await fetch('/api/comments', {
+            await fetch('https://ancient-coast-10467-29aec9277293.herokuapp.com/api/comments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,4 +116,3 @@
 
 </body>
 </html>
-
