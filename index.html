@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大狗蛋公司官网</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .image-container {
+            margin: 20px 0;
+        }
+        .message-box {
+            margin: 20px 0;
+            text-align: left;
+            display: inline-block;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .message-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .message-list li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>欢迎来到大狗蛋公司官网</h1>
+
+    <!-- 新增图片部分 -->
+    <div class="image-container">
+        <img src="4cdd7dd800542c85ed705d8a9dbb67c.jpg" alt="狗蛋公司图片" width="400" height="400">
+    </div>
+
+    <div class="message-box">
+        <h2>留言板</h2>
+        <textarea id="messageInput" placeholder="在这里输入您的留言..."></textarea>
+        <br>
+        <button onclick="submitMessage()">提交留言</button>
+    </div>
+
+    <div class="message-list">
+        <h2>留言记录：</h2>
+        <ul id="messageList"></ul>
+    </div>
+
+    <script>
+        async function fetchMessages() {
+            const response = await fetch('/api/comments');
+            const messages = await response.json();
+            const messageList = document.getElementById("messageList");
+
+            messageList.innerHTML = '';
+            messages.forEach(message => {
+                const li = document.createElement('li');
+                li.textContent = message.content;
+                messageList.appendChild(li);
+            });
+        }
+
+        async function submitMessage() {
+            const messageInput = document.getElementById("messageInput").value.trim();
+            if (messageInput === "") {
+                alert("请输入留言内容！");
+                return;
+            }
+
+            await fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: messageInput }),
+            });
+
+            document.getElementById("messageInput").value = "";
+            fetchMessages();
+        }
+
+        window.onload = fetchMessages;
+    </script>
+
+</body>
+</html>
+
