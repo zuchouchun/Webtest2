@@ -4,11 +4,11 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;  // 使用 Heroku 提供的端口或默认本地的 3000 端口
 
-// 设置 MySQL 连接：如果有 Heroku 的 CLEARDB_DATABASE_URL 环境变量，则使用它，否则使用本地开发配置
+// 设置 MySQL 连接：如果有 Heroku 的 JAWSDB_URL 环境变量，则使用它，否则使用本地开发配置
 let connection;
-if (process.env.CLEARDB_DATABASE_URL) {
-    // 使用 Heroku ClearDB MySQL 的连接配置
-    connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+if (process.env.JAWSDB_URL) {
+    // 使用 Heroku JawsDB MySQL 的连接配置
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
     // 本地开发使用的 MySQL 配置
     connection = mysql.createConnection({
