@@ -1,15 +1,15 @@
 {
   "name": "message-board",
   "version": "1.0.0",
-  "main": "server.js",  // 修改为你的主文件 server.js
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",  // 添加 start 脚本，Heroku 会调用它启动应用
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "A simple message board backend with Node.js and MySQL",  // 可选，描述项目
+  "description": "A simple message board backend with Node.js and MySQL",
   "dependencies": {
     "express": "^4.21.0",
     "mysql": "^2.18.1"
